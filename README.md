@@ -1,2 +1,1 @@
-# richardsmodels
 # cts.farwestoutdoor.com
