@@ -1,0 +1,45 @@
+// JavaScript Document
+var map = null;
+function createMap(){
+	var myOptions = {
+		zoom: 11,
+		center: new google.maps.LatLng(51.04,-114.057222),
+		mapTypeControl: true,
+		disableDefaultUI: false,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+  	 }
+
+ 	map = new google.maps.Map(document.getElementById("gmap"), myOptions);
+	
+	
+}
+function createBricks(){
+	$.getJSON( "bin/grid.php", function( data ) {
+		
+		for (var i = 0;  i < data.length;  i++) {
+				   var rectangle = new google.maps.Rectangle({
+				   strokeColor: '#FF0000',
+				   strokeOpacity: 0.8,
+				   strokeWeight: 2,
+				   fillColor: '#ffffff',
+				   fillOpacity: .35,
+				   map: map,
+				   id: i,
+				   clickable: true,
+				   bounds: new google.maps.LatLngBounds(
+				 	 new google.maps.LatLng(data[i].sw_latitude, data[i].sw_longitude),
+					 new google.maps.LatLng(data[i].ne_latitude, data[i].ne_longitude)
+					 )
+				 });
+		 google.maps.event.addListener(rectangle, 'click', function(event) {
+			 rectangle.fillColor='#000';
+		 });
+		}
+	});
+}
+function showInfo(event, brick){
+	alert(rectangle.id);
+	
+}
+	
+
