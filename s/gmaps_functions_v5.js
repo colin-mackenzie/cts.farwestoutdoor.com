@@ -31,8 +31,10 @@ function initialize() {
 		  new google.maps.LatLng(ne_lat, ne_lng)
 		);
 		var sc='#000000';
-		if(data[i].cost){
-			var sc='#FF0000'		
+		if(data[i].cost<=0.5){
+			var sc='#FFFF00'		
+		}else if(data[i].cost>0.5){
+			var sc='#00CC00'
 		}
 			
 		rectangle = new google.maps.Rectangle({
