@@ -35,7 +35,7 @@ for($c=250;$c<300;$c++){
 	'".round($brick_detail_array->hit_count_last_three_periods)."',
 	'".$brick_detail_array->hit_count_last_period."',
 	'".$brick_detail_array->availability."',
-	'".$brick_detail_array->avialable."',
+	'".$brick_detail_array->available."',
 	'',
 	'".$bricks_array[$c]->created_at."',
 	'".$bricks_array[$c]->updated_at."'

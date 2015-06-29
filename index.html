@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>FarWest Outdoor CTS Map Grid</title>
+<title>FarWest Outdoor CTS Map Search</title>
 <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 <!--Custom Style Sheets-->
 <style>
@@ -13,7 +14,7 @@ body, html,.row {
 }
 header, nav,.row,.nopm{
   padding:0px;
-  margin:0px;	
+  margin:0px; 
 }
 .modal-dialog {
   padding-top: 15%;
@@ -31,14 +32,14 @@ a.focus,.navbar-brand{
     color: #ffffff;
 }
 #availModal .modal-dialog{
-	padding-top:15px;	
+  padding-top:15px; 
 }
 .badge {
     background-color: #fff;
     border-radius: 10px;
     color: #000;
     display: inline-block;
-    font-size: 12px;
+    font-siplaceholder=""e: 12px;
     font-weight: 700;
     line-height: 1;
     min-width: 10px;
@@ -56,7 +57,7 @@ a.focus,.navbar-brand{
     margin: 0 0 0 -50%;
     padding: 6px 10px 5px;
     text-align: center;
-	margin-top:11px;
+  margin-top:11px;
     top: 1px;
 }
 .cart-timer:after {
@@ -70,7 +71,7 @@ a.focus,.navbar-brand{
     right: -7px;
     top: 7px;
     width: 0;
-	margin-top:11px;
+  margin-top:11px;
 }
 .cart-timer.hurry {
     background-color: #E67E22;
@@ -93,7 +94,10 @@ a.focus,.navbar-brand{
     border: 1px solid transparent;
     border-radius: 4px;
     padding: 1px;
-	width:350px;
+  width:500px;
+}
+.modal-dialog {
+    padding-top: 5% !important;
 }
 
 </style>
@@ -116,24 +120,269 @@ a.focus,.navbar-brand{
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#" data-toggle="modal" data-target="#myModal">Map Instructions</a></li>
+        <!--<li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Legend <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#"><img src="i/front.png"  />&nbsp;Standard</a></li>
+            <li><a href="#"><img src="i/prem.png" />&nbsp;Premium </a></li>
+           <li><a href="#"><img src="i/dt.png" />&nbsp;Wire Benches</a></li>
+          </ul>
+        </li>-->
+    <li><a href="#"></a></li>
+      </ul>
       
-     
-     
+     <ul class="nav navbar-nav navbar-right">
+      <li><div id="addAlert" class="cart-timer" style="display: block;">
+          
+           
+            </div>
+            </li>
+            <li style="margin-right:-25px;"><a href="#"><img src="i/cart.png" style="height:20px"></a></li>
+        <li><a href="#" data-toggle="modal" data-target="#campaignModal">Campaign List&nbsp;&nbsp;<span class="badge">0</span></a>
+      
+        </li>
+    <li><a href="#">&nbsp;</a></li>
+        <li><a href="#">&nbsp;</a></li>
+            </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 </header>
 <!-- End Nav Bar -->
 <div class="row">
-       <div id="map-container" style="width:100%; height:100%; margin:0px; top:0px; overflow:hidden;z-index:1"></div>
+  <div id="map-container" style="width:100%; height:100%; margin:0px; top:0px; overflow:hidden;z-index:1"></div></div>
+<footer>
+    <div class="navbar navbar-inverse navbar-fixed-bottom" style="height:50px;">
+        <div class="container">
+            <div id="footer-body" class="navbar-collapse collapse">
+                <div class="row">
+                    <div class="col-md-3 text-center" style="margin-top:10px;">&nbsp;</div>
+                    <div class="col-md-6 text-center" style="margin-top:10px;">
+                      <div class="alert alert-success">
+                        <img src="i/green.png" height="25"/>&nbsp;Available
+                        <img src="i/yellow.png" height="25"/>&nbsp;In Development (Coming Soon)
+                        <img src="i/red.png" height="25"/>&nbsp;Sold</div>
+                      <div class="col-md-3 text-center" style="margin-top:10px;">&nbsp;</div>
+                      </div>
+                 </div>
+
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Brick Map Instructions</h4>
+      </div>
+      <div class="modal-body"> 
+        <p style="color:red;">All the bricks displayed in green are currently available. </p>
+        <p>The Legend Menu displays the color coordinated status of each brick.</p>
+        <p><u>Click on a brick</u> to view more information about the area, including Acutal 28 day traffic counts, guaranteeed traffic price point and availabilty status.</p>
+        <p>In the brick view more info pop over you can elect to reserve the brick or add it to your campiagn list and reserve another.</p>
+        <p>If you are creating a campiagn list, click <u>Campiagn List</u> at the top right to checkout once completed.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="confirmModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Transaction Success</h4>
+      </div>
+      <div class="modal-body"> 
+       <p>Your transaction was approved. Please review the email sent to your account for further details.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="campaignModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form>
+     <input type="hidden" id="cartLength" value="0">
+     <input type="hidden" id="brickids" value="">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Campaign List</h4>
+      </div>
+      <div class="modal-body"> 
+        <table id="CampaignBody" class="table table-hover table-bordered">
+        <thead>
+          <th>Action</th>
+            <th>Brick ID</th>
+            <th>28 Day Traffic Counts</th>
+            <th>Traffic Price Point</th>
+            <th>Availability</th>
+        </thead>
+        <tbody >
+        
+        </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+         <button type="button" class="btn btn-default" data-toggle="modal" data-dismiss="modal" data-target="#checkoutModel"  >Checkout</button>&nbsp;
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" id="checkoutModel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+    <form>
+     <input type="hidden" id="cartLength" value="0">
+     <input type="hidden" id="brickids" value="">
+
+      <div class="modal-body"> 
+       <div role="tabpanel">
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">1. Your Info</a></li>
+      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">2. Addon Options</a></li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">3. Credit Card Info</a></li>
+      <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">4. Confirmation</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="home">
+        <form class="form-inline">
+        <div class="form-group">
+          <label for="exampleInputName2">First Name</label>
+          <input type="text" class="form-control" id="exampleInputName2" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">Last Name</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">Address</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+                <div class="form-group">
+          <label for="exampleInputEmail2">Home Phone</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+
+                <div class="form-group">
+          <label for="exampleInputEmail2">Business  Phone</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+
+                <div class="form-group">
+          <label for="exampleInputEmail2">Email</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+        <a class="pull-right next-btn"><button type="button" class="btn btn-default">Next</button> </a>
+      </form>
+      <br><Br>
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="profile">
+          
+      <form class="form">
+        <div class="form-group">
+          <label for="exampleInputName2">Artwork</label>
+          <input type="checkbox" class="form-control" id="exampleInputName1" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">Landing page</label>
+          <input type="checkbox" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">Account Tracking</label>
+          <input type="checkbox" class="form-control" id="exampleInputEmail3" placeholder="">
+        </div>
+                <div class="form-group">
+          <label for="exampleInputEmail2">Q codes</label>
+          <input type="checkbox" class="form-control" id="exampleInputEmail4" placeholder="">
+        </div>
+
+                <div class="form-group">
+          <label for="exampleInputEmail2">Bar codes</label>
+          <input type="checkbox" class="form-control" id="exampleInputEmail5" placeholder="">
+        </div>
+
+                <div class="form-group">
+          <label for="exampleInputEmail2">Other</label>
+          <input type="checkbox" class="form-control" id="exampleInputEmail6" placeholder="">
+        </div>
+        <a class="pull-right next-btn"><button type="button" class="btn btn-default">Next</button> </a>
+      </form>
+      <br><Br>
+
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="messages">
+          
+                  <form class="form">
+        <div class="form-group">
+          <label for="exampleInputName2">Credit Card Type</label>
+          <select class="form-control">
+            <option>AMEX</option>
+            <option>Visa</option>
+            <option>Mastercard</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">Credit Card Number</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputEmail2">Expiry Date</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+                <div class="form-group">
+          <label for="exampleInputEmail2">CW</label>
+          <input type="email" class="form-control" id="exampleInputEmail2" placeholder="">
+        </div>
+        <a class="pull-right exec-btn"><button type="button" data-dismiss="modal" class="btn btn-success">Submit</button> </a>
+      </form>
+      <br><Br>
+
+      </div>
+
+
+      </div>
+      <div role="tabpanel" class="tab-pane" id="settings">...</div>
+    </div>
+
 </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 
 
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
-<script src="s/gmaps_functions_v5.js" type="text/javascript"></script>
-
-
+<script src="s/gmaps_functions_v5.js" type="text/jplaceholder=""script"></script>
+<script src="s/labels.js" type="text/javascript"></script>
 
