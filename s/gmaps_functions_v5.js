@@ -55,6 +55,10 @@ function initialize() {
     };
   map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
 
+   $.getJSON( "https://adcentral-staging.ivrnet.com/api/v1/bricks?channel_id=80159af0-0ebd-41f9-9a49-bf86337b26d5", function( data ) {
+   		console.log(data);
+   });
+
   $.getJSON( "bin/grid_db.php", function( data ) {
 	for (var i = 0;  i < data.length;  i++) {
 		var ne_lat = data[i].ne_latitude,
