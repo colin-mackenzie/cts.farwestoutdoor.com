@@ -9,17 +9,18 @@ function RemoveBrick(obj){
     $(".badge").html(cartlength);
 	if(	!cartlength)  $("#Checkout").attr("disabled",true);
 	var bids = $("#brickids").val();
-	var bidsArray = bids.split("-"); 
-	var index = bidsArray.indexOf(realid);
+	var bidsArray = bids.split(","); 
+	var index = bidsArray.indexOf(bid);
 	if (index > -1) {
    		 bidsArray.splice(index, 1);
-		 var bidsstring =bidsArray.join("-");
+		 var bidsstring =bidsArray.join(",");
 		 $("#brickids").val(bidsstring);
 		 
 	}
+
 }
 
-function AddtoCampaignList(bid,avail,tc){
+function AddtoCampaignList(bid,avail,tc,code){
 
 	if($("#CampaignBody tbody tr").find("#" + bid).length>0	){
 		$("#addAlert").html("Brick : "+bid+" is already in your Campaign List");
@@ -28,19 +29,19 @@ function AddtoCampaignList(bid,avail,tc){
 	} else {
 
 		$("#Checkout").attr("disabled",false);
-		$("li #addAlert").html("Brick : "+bid+" was added to your Campaign List");
+		$("li #addAlert").html("Brick : "+code+" was added to your Campaign List");
 		$("#addAlert").fadeIn(3);
 		$("#addAlert").fadeOut(6000);
 		var cartlength = $("#cartLength").val();
 		cartlength++;
 		$("#cartLength").val(cartlength);
 		$(".badge").html(cartlength);
-		data="<tr id='"+bid+"'><td><button onClick=\"RemoveBrick(this)\"  type=\"button\" class=\"btn btn-danger  btn-sm\" id=\""+bid+"\" title=\"Remove\">Remove</i></button></td><td>"+bid+"</td><td>" +tc+"</td><td>TBA</td><td>"+avail+ "</td></tr>";
+		data="<tr id='"+bid+"'><td><button onClick=\"RemoveBrick(this)\"  type=\"button\" class=\"btn btn-danger  btn-sm\" id=\""+bid+"\" title=\"Remove\">Remove</i></button></td><td>"+code+"</td><td>" +tc+"</td><td>TBA</td><td>"+avail+ "</td></tr>";
 		$("#campaignModal .modal-body #CampaignBody tbody").append(data);
 		if (!$("#brickids").val()){
 			 $("#brickids").val(bid);
 		} else {
-			 $("#brickids").val($("#brickids").val() + "-" + bid);
+			 $("#brickids").val($("#brickids").val() + "," + bid);
 
 		}
 	}
@@ -55,12 +56,12 @@ function initialize() {
     };
   map = new google.maps.Map(document.getElementById('map-container'), mapOptions);
 
-   $.getJSON( "https://adcentral-staging.ivrnet.com/api/v1/bricks?channel_id=80159af0-0ebd-41f9-9a49-bf86337b26d5", function( data ) {
-   		console.log(data);
-   });
 
-  $.getJSON( "bin/grid_db.php", function( data ) {
+
+
+  $.getJSON( "bin/grid.php", function( data ) {
 	for (var i = 0;  i < data.length;  i++) {
+
 		var ne_lat = data[i].ne_latitude,
 		  ne_lng = data[i].ne_longitude,
 		  sw_lat = data[i].sw_latitude,
@@ -69,7 +70,7 @@ function initialize() {
 		  new google.maps.LatLng(sw_lat, sw_lng),
 		  new google.maps.LatLng(ne_lat, ne_lng)
 		);
-		var sc='#000000';
+	
 		if(data[i].cost<=0.5){
 			var sc='#fad201'	
 			var status='Under Construction';
@@ -83,6 +84,14 @@ function initialize() {
 			var avail="Immediate";
 			var no=1;
 
+		}
+
+		if(data[i].campaign_id){
+			var sc='#ef1422';
+			var status='Sold';
+			var icon="red";
+			var avail="Sold";
+			var no=0;
 		}
 			
 		rectangle = new google.maps.Rectangle({
@@ -109,9 +118,9 @@ function initialize() {
 		/*if(!j[i].statusCheck) buttons="<button type='button' class='btn btn-default'>Request Now</button>&nbsp;<button type='button' class='btn btn-default'>Add to Request List</button>";
 						else buttons="<button type='button' class='btn btn-default'>Add to Request List</button>";*/
 
-		if(no) buttons="<button type='button' class='btn btn-default' onClick='AddtoCampaignList("+data[i].code2+",\""+avail+"\","+data[i].hit_count_last_period+")' id='AddCampaign'>Add to Campaign</button>&nbsp;<button type='button' class='btn btn-default' data-toggle='modal' class='closeInfoWindow' data-bid='"+data[i].code2+"' data-target='#checkoutModel'>Request Now</button>";
+		if(no) buttons="<button type='button' class='btn btn-default' onClick='AddtoCampaignList(\""+data[i].id+"\",\""+avail+"\","+data[i].hit_count_last_period+",\""+data[i].code+"\")' id='AddCampaign'>Add to Campaign</button>&nbsp;<a class='btn btn-default' class='closeInfoWindow' href='https://adcentral-staging.ivrnet.com/farwest/bricks_purchase/?bricks="+data[i].id+"'>Request Now</a>";
 		else buttons="";
-		content="<div class='container' style='width:300px;height:225px;overflow:hidden'><div class='row' style='width:300px;height:275;overflow:hidden'><h3><img  src='i/"+icon+".png'>&nbsp;"+status+"</h3><span style='font-size:12px;'>Brick ID:&nbsp;<span style='color:red;'>"+data[i].code2+"</span>&nbsp;&nbsp;<i>"+status+"</i><br><br>28 day traffic counts: <span style='color:red;'>"+data[i].hit_count_last_period+"</span><br>Guaranteed Traffic Price Point: <span style='color:red;'>TBA</span>&nbsp;<br>Available:<span style='color:red;'>"+avail+"</span></span><br><br>"+buttons+"</div></div>";
+		content="<div class='container' style='width:300px;height:225px;overflow:hidden'><div class='row' style='width:300px;height:275;overflow:hidden'><h3><img  src='i/"+icon+".png'>&nbsp;"+status+"</h3><span style='font-size:12px;'>Brick ID:&nbsp;<span style='color:red;'>"+data[i].code+"</span>&nbsp;&nbsp;<i>"+status+"</i><br><br>28 day traffic counts: <span style='color:red;'>"+data[i].hit_count_last_period+"</span><br>Guaranteed Traffic Price Point: <span style='color:red;'>TBA</span>&nbsp;<br>Available:<span style='color:red;'>"+avail+"</span></span><br><br>"+buttons+"</div></div>";
 		createClickablePoly(rectangle, content, map);
 		var mapLabel = new MapLabel({
           text: data[i].cost,
@@ -154,10 +163,15 @@ $(document).ready(function() {
   		$("#brickids").val($(".closeInfoWindow").data("bid"));
   })
 
+  $(".checkout").click(function(){
+	if($("#brickids").val()){
+  		window.location="https://adcentral-staging.ivrnet.com/farwest/bricks_purchase/?bricks="+$("#brickids").val();
+  	}
+  });
+
 $('#checkoutModel').on('show.bs.modal', function (event) {
 
 
-		console.log($("#brickids").val());
 		
   		  	if (typeof infoWindow != "undefined") {
 			if (infoWindow) {
