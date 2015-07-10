@@ -118,7 +118,7 @@ function initialize() {
 		/*if(!j[i].statusCheck) buttons="<button type='button' class='btn btn-default'>Request Now</button>&nbsp;<button type='button' class='btn btn-default'>Add to Request List</button>";
 						else buttons="<button type='button' class='btn btn-default'>Add to Request List</button>";*/
 
-		if(no) buttons="<button type='button' class='btn btn-default' onClick='AddtoCampaignList(\""+data[i].id+"\",\""+avail+"\","+data[i].hit_count_last_period+",\""+data[i].code+"\")' id='AddCampaign'>Add to Campaign</button>&nbsp;<a class='btn btn-default' class='closeInfoWindow' href='https://adcentral-staging.ivrnet.com/farwest/bricks_purchase/?bricks="+data[i].id+"'>Request Now</a>";
+		if(no) buttons="<button type='button' class='btn btn-default' onClick='AddtoCampaignList(\""+data[i].code+"\",\""+avail+"\","+data[i].hit_count_last_period+",\""+data[i].code+"\")' id='AddCampaign'>Add to Campaign</button>&nbsp;<a class='btn btn-default' class='closeInfoWindow' href='https://adcentral-staging.ivrnet.com/farwest/bricks_purchase/?bricks="+data[i].code+"'>Request Now</a>";
 		else buttons="";
 		content="<div class='container' style='width:300px;height:225px;overflow:hidden'><div class='row' style='width:300px;height:275;overflow:hidden'><h3><img  src='i/"+icon+".png'>&nbsp;"+status+"</h3><span style='font-size:12px;'>Brick ID:&nbsp;<span style='color:red;'>"+data[i].code+"</span>&nbsp;&nbsp;<i>"+status+"</i><br><br>28 day traffic counts: <span style='color:red;'>"+data[i].hit_count_last_period+"</span><br>Guaranteed Traffic Price Point: <span style='color:red;'>TBA</span>&nbsp;<br>Available:<span style='color:red;'>"+avail+"</span></span><br><br>"+buttons+"</div></div>";
 		createClickablePoly(rectangle, content, map);
@@ -164,8 +164,10 @@ $(document).ready(function() {
   })
 
   $(".checkout").click(function(){
-	if($("#brickids").val()){
-  		window.location="https://adcentral-staging.ivrnet.com/farwest/bricks_purchase/?bricks="+$("#brickids").val();
+  	bids=$("#brickids").val();
+	if(bids){
+		$("#brickids").val('');
+  		window.location="https://adcentral-staging.ivrnet.com/farwest/bricks_purchase/?bricks="+bids;
   	}
   });
 
