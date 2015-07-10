@@ -158,6 +158,7 @@ $(document).ready(function() {
   $("#addAlert").hide();
   $("#campaignModal .modal-body #CampaignBody tbody").html("");
   $("#cartLength").val("");
+  $("#brickids").val('');
 
   $(".closeInfoWindow").click(function(){
   		$("#brickids").val($(".closeInfoWindow").data("bid"));
