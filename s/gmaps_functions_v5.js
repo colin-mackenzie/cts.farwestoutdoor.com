@@ -124,7 +124,7 @@ function initialize() {
 		createClickablePoly(rectangle, content, map);
 
 
-		if(!no){
+		if(no){
 			var mapLabel = new MapLabel({
 		      text: data[i].cost,
 		      position: rectangle.bounds.getCenter(),
