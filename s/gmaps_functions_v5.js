@@ -122,13 +122,17 @@ function initialize() {
 		else buttons="";
 		content="<div class='container' style='width:300px;height:225px;overflow:hidden'><div class='row' style='width:300px;height:275;overflow:hidden'><h3><img  src='i/"+icon+".png'>&nbsp;"+status+"</h3><span style='font-size:12px;'>Brick ID:&nbsp;<span style='color:red;'>"+data[i].code+"</span>&nbsp;&nbsp;<i>"+status+"</i><br><br>28 day traffic counts: <span style='color:red;'>"+data[i].hit_count_last_period+"</span><br>Guaranteed Traffic Price Point: <span style='color:red;'>TBA</span>&nbsp;<br>Available:<span style='color:red;'>"+avail+"</span></span><br><br>"+buttons+"</div></div>";
 		createClickablePoly(rectangle, content, map);
-		var mapLabel = new MapLabel({
-          text: data[i].cost,
-          position: rectangle.bounds.getCenter(),
-          map: map,
-          fontSize: 10,
-          align: 'center'
-        });
+
+
+		if(!no){
+			var mapLabel = new MapLabel({
+		      text: data[i].cost,
+		      position: rectangle.bounds.getCenter(),
+		      map: map,
+		      fontSize: 10,
+		      align: 'center'
+		    });
+		}
 	}
 
   });
